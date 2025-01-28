@@ -2,9 +2,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 
-class Calculate_50_30_20(Screen):
+class ui_50_30_20(Screen):
     def __init__(self, **kwargs):
-        super(Calculate_50_30_20, self).__init__(**kwargs)
+        super(ui_50_30_20, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
 
         # Метки для отображения информации о расходах

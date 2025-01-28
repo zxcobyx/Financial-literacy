@@ -2,9 +2,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 
-class Calculate_6jar(Screen):
+class ui_buckets(Screen):
     def __init__(self, **kwargs):
-        super(Calculate_6jar, self).__init__(**kwargs)
+        super(ui_buckets, self).__init__(**kwargs)
         layout = BoxLayout(orientation='vertical')
 
         # Метки для отображения информации о расходах

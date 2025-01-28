@@ -16,7 +16,7 @@ class AddDialog(BoxLayout):
         self.add_widget(self.income_input)
 
         self.method_spinner = Spinner(
-            text='6 кувшинов',
+            text='Метод',
             values=['6 кувшинов', '50/30/20'],
             size_hint_y=None, height=40
         )
@@ -37,7 +37,15 @@ class AddDialog(BoxLayout):
             method = self.method_spinner.text
 
             if method == '6 кувшинов':
-                result = calculate_buckets(income)
+                result = calculate_buckets(income) 
+                """
+                {'Необходимые расходы': 6795.250000000001, 
+                'Забота о себе': 1235.5, 
+                'Образование': 1235.5, 
+                'Копилка': 1235.5, 
+                'Инвестиции': 1235.5, 
+                'Подарки и благотворительность': 617.75}
+                """
             elif method == '50/30/20':
                 result = calculate_budget(income)
 
