@@ -15,3 +15,15 @@ BUCKETS_CONFIG = [
     {"name": "Инвестиции", "percentage": INVESTMENTS_PERCENTAGE},
     {"name": "Подарки и благотворительность", "percentage": GIFTS},
 ]
+
+# Константы для процентов бюджета 50/30/20
+OBLIGATORY_EXPENSES_PERCENTAGE = 50
+ENTERTAINMENT_PERCENTAGE = 30
+DEBTS_PERCENTAGE = 20
+
+# Список категорий бюджета с их процентами
+BUDGET_CONFIG = [
+    {"name": "Обязательные расходы", "percentage": OBLIGATORY_EXPENSES_PERCENTAGE},
+    {"name": "Развлечения, хобби, путешествия", "percentage": ENTERTAINMENT_PERCENTAGE},
+    {"name": "Кредиты и займы", "percentage": DEBTS_PERCENTAGE},
+]
