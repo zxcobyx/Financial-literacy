@@ -4,8 +4,8 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
 from kivy.uix.button import Button
-from uiux.calculate_50_30_20 import Calculate_50_30_20
-from uiux.calculate_6jar import Calculate_6jar
+from backend.calculations.buckets import calculate_buckets
+from backend.calculations.budget import calculate_budget
 
 class AddDialog(BoxLayout):
     def __init__(self, **kwargs):
