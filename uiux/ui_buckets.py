@@ -5,7 +5,7 @@ from kivy.uix.label import Label
 class ui_buckets(Screen):
     def __init__(self, **kwargs):
         super(ui_buckets, self).__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        self.layout = BoxLayout(orientation='vertical')
 
         # Метки для отображения информации о расходах
         self.label1 = Label(text="Необходимые расходы: ")
