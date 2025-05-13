@@ -52,7 +52,7 @@ class MainScreen(Screen):
             size_hint=(1, None),
             background_color=BUTTONS_COLOR
         )
-        add_button.bind(on_press=lambda instance: setattr(self.manager, 'current', 'menu'))
+        # add_button.bind(on_press=lambda instance: setattr(self.manager, 'current', 'menu'))
 
         # Кнопка "FAQ"
         faq_button = Button(

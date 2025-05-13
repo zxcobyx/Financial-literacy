@@ -6,9 +6,12 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Color, Rectangle
 from screens.const_colors import BACKGROUND_COLOR, BUTTONS_COLOR
 
+from backend.database.db_manager import create_user, check_user
+
 class ProfileScreen(Screen):
     def __init__(self, **kwargs):
         super(ProfileScreen, self).__init__(**kwargs)
+        from kivy.uix.textinput import TextInput
         with self.canvas.before:
             Color(*BACKGROUND_COLOR)
             self.rect = Rectangle(pos=self.pos, size=self.size)
@@ -22,6 +25,15 @@ class ProfileScreen(Screen):
             size_hint=(0.5, 0.5),
             pos_hint={'center_x': 0.5, 'center_y': 0.6}
         )
+
+        # Поля ввода email, username, password
+        self.email_input = TextInput(hint_text='Email', size_hint=(1, None), height=40)
+        self.username_input = TextInput(hint_text='Username', size_hint=(1, None), height=40)
+        self.password_input = TextInput(hint_text='Password', password=True, size_hint=(1, None), height=40)
+
+        center_layout.add_widget(self.email_input)
+        center_layout.add_widget(self.username_input)
+        center_layout.add_widget(self.password_input)
 
         # Горизонтальный лэйаут для картинки и кнопок
         top_layout = BoxLayout(
@@ -52,6 +64,8 @@ class ProfileScreen(Screen):
             size_hint=(1, None),
             height=60
         )
+        auth_button.bind(on_press=self.register_user)
+
 
         # Кнопка "Войти"
         login_button = Button(
@@ -60,6 +74,8 @@ class ProfileScreen(Screen):
             size_hint=(1, None),
             height=60
         )
+        login_button.bind(on_press=self.login_user)
+
 
         buttons_layout.add_widget(auth_button)
         buttons_layout.add_widget(login_button)
@@ -98,3 +114,30 @@ class ProfileScreen(Screen):
 
     def on_size(self, *args):
         self.rect.size = self.size
+
+    def register_user(self, instance):
+        email = self.email_input.text.strip()
+        username = self.username_input.text.strip()
+        password = self.password_input.text.strip()
+
+        if email and username and password:
+            success = create_user(email, username, password)
+            if success:
+                print("Пользователь успешно зарегистрирован!")
+            else:
+                print("Ошибка: пользователь с такой почтой уже существует.")
+        else:
+            print("Все поля должны быть заполнены.")
+
+    def login_user(self, instance):
+        email = self.email_input.text.strip()
+        password = self.password_input.text.strip()
+
+        if email and password:
+            success = check_user(email, password)
+            if success:
+                print("Успешный вход!")
+            else:
+                print("Неверный email или пароль.")
+        else:
+            print("Введите email и пароль.")
