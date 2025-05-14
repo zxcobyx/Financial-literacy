@@ -5,6 +5,8 @@ from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 from kivy.graphics import Color, Rectangle
 from screens.const_colors import BACKGROUND_COLOR, BUTTONS_COLOR
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 
 from backend.database.db_manager import create_user, check_user
 
@@ -124,10 +126,13 @@ class ProfileScreen(Screen):
             success = create_user(email, username, password)
             if success:
                 print("Пользователь успешно зарегистрирован!")
+                self.show_popup("Регистрация", "Пользователь успешно зарегистрирован!")
             else:
                 print("Ошибка: пользователь с такой почтой уже существует.")
+                self.show_popup("Ошибка", "Пользователь с такой почтой уже существует.")
         else:
             print("Все поля должны быть заполнены.")
+            self.show_popup("Ошибка", "Все поля должны быть заполнены.")
 
     def login_user(self, instance):
         email = self.email_input.text.strip()
@@ -137,7 +142,23 @@ class ProfileScreen(Screen):
             success = check_user(email, password)
             if success:
                 print("Успешный вход!")
+                self.show_popup("Вход", "Успешный вход!")
             else:
                 print("Неверный email или пароль.")
+                self.show_popup("Ошибка", "Неверный email или пароль.")
         else:
             print("Введите email и пароль.")
+            self.show_popup("Ошибка", "Введите email и пароль.")
+
+    def show_popup(self, title, message):
+        content = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        content.add_widget(Label(text=message))
+        btn_close = Button(text='Закрыть', size_hint=(1, 0.3))
+        content.add_widget(btn_close)
+
+        popup = Popup(title=title,
+                    content=content,
+                    size_hint=(0.7, 0.4),
+                    auto_dismiss=False)
+        btn_close.bind(on_release=popup.dismiss)
+        popup.open()
